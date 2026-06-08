@@ -86,6 +86,6 @@ WHERE o.order_status = 'delivered'
 GROUP BY c.customer_state
 
 ORDER BY percentual_atraso DESC; -- Quero ver o maior atraso
-´´´
+```
 ### 📊 Resultado da Análise:
 ![Tabela de Resultados Logística](resultado_logistica.jpg)
