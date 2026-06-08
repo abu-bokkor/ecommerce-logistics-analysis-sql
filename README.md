@@ -42,6 +42,7 @@ WITH frete_por_pedido AS (
         order_id,
         SUM(freight_value) AS frete_total_pedido
     FROM tb_order_items
+
     GROUP BY order_id
 )
 
@@ -67,7 +68,7 @@ SELECT
         / COUNT(o.order_id)) * 100, 1) AS percentual_atraso,
         
     /* Métrica 4: Custo médio do frete por pedido no estado
-       Usei AVG para puxar média e no final GROUP BY agrupei por estado*/
+    Usei AVG para puxar média e no final GROUP BY agrupei por estado*/
     ROUND(AVG(f.frete_total_pedido), 2) AS custo_medio_frete
 FROM tb_orders AS o
 
@@ -85,3 +86,6 @@ WHERE o.order_status = 'delivered'
 GROUP BY c.customer_state
 
 ORDER BY percentual_atraso DESC; -- Quero ver o maior atraso
+
+### 📊 Resultado da Análise:
+![Tabela de Resultados Logística](resultado_logistica.jpg)
