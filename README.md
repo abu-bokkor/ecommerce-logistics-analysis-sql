@@ -33,7 +33,7 @@ Para garantir máxima performance computacional, as métricas de tempo, volume e
 /* --------------------------------------------------------------------------------------
    PROJETO 1: PERFORMANCE LOGÍSTICA (E-COMMERCE OLIST)
    Objetivo: Analisar tempo de entrega, taxa de atraso e custo de frete por estado
-   em uma única visão unificada.
+   e por mês em uma única visão unificada.
 ----------------------------------------------------------------------------------------- */
 
 -- CTE para somar o frete de todos os itens dentro de um mesmo pedido
@@ -49,6 +49,10 @@ WITH frete_por_pedido AS (
 -- Consulta Principal unindo Tempo, Atrasos e Custo de Frete
 SELECT 
     c.customer_state AS estado_destino,
+    
+    -- Extraindo o Ano e Mês da compra para permitir filtros de linha do tempo no Power BI
+    strftime('%Y-%m', o.order_purchase_timestamp) AS ano_mes_compra,
+    
     COUNT(o.order_id) AS total_pedidos,
     
     /* Métrica 1: Tempo médio de entrega (Dias)
@@ -82,10 +86,11 @@ JOIN frete_por_pedido AS f
 WHERE o.order_status = 'delivered'
     AND o.order_delivered_customer_date IS NOT NULL
     
--- Ao agrupar por estado, tenho a certeza de que a média é por estado e não por Brasil inteiro
-GROUP BY c.customer_state
+-- Ao agrupar por estado e mês, a certeza é de que a média é calculada para cada estado dentro de cada mês específico
+GROUP BY c.customer_state, ano_mes_compra
 
-ORDER BY percentual_atraso DESC; -- Quero ver o maior atraso
+ORDER BY ano_mes_compra ASC, percentual_atraso DESC; -- Ordenado por linha do tempo e maiores atrasos
+
 ```
 ### 📊 Resultado da Análise:
-![Tabela de Resultados Logística](resultado_logistica.jpg)
+![Tabela de Resultados Logística](resultado_tabela_logistica_sqlite.jpg)
