@@ -100,8 +100,8 @@ Para elevar o nível da análise e garantir um carregamento instantâneo do dash
 
 Para manter a precisão matemática e evitar o erro comum da "Média das Médias" ao trabalhar com dados agrupados, desenvolvi Medidas Ponderadas utilizando a função SUMX. Isso garante que os estados com altíssimo volume de vendas colaborem proporcionalmente para os indicadores gerais:
 
-* **Média de Dias de Entrega Ponderada:
-  Média Dias Entrega = 
+* Média de Dias de Entrega Ponderada:
+Média Dias Entrega = 
 DIVIDE(
     SUMX(base_dashboard_logistica, base_dashboard_logistica[media_dias_entrega] * base_dashboard_logistica[total_pedidos]),
     [Total Pedidos],
