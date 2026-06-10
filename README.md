@@ -92,5 +92,7 @@ GROUP BY c.customer_state, ano_mes_compra
 ORDER BY ano_mes_compra ASC, percentual_atraso DESC; -- Ordenado por linha do tempo e maiores atrasos
 
 ```
-### 📊 Resultado da Análise:
+### 📊 Resultado da Análise SQLite:
 ![Tabela de Resultados Logística](resultado_tabela_logistica_sqlite.jpg)
+
+## 📈 Visualização Dinâmica e Inteligência em DAX (Power BI)
